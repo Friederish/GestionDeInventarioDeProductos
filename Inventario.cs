@@ -31,6 +31,16 @@ namespace GestionDeInventario
             }
             return false;
         }
+        public bool EliminarProducto(string nombre)
+        {
+            var producto = productos.FirstOrDefault(p => p.Nombre == nombre);
+            if (producto != null)
+            {
+                productos.Remove(producto);
+                return true;
+            }
+            return false;
+        }
 
         // Método para filtrar y ordenar los productos por precio mínimo
         public IEnumerable<Producto> FiltrarYOrdenarProductos(decimal precioMinimo)
