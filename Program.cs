@@ -19,13 +19,12 @@ class Program
             Console.Write("Nombre: ");
             string nombre = LeerCadenaNoVacia("Nombre: ");
             decimal precio = LeerPrecioPositivo("Precio: ");
-            
-            
+
 
             Producto producto = new Producto(nombre, precio);
             inventario.AgregarProducto(producto);
         }
-        decimal precioMinimo = LeerPrecioPositivo("\n Ingrese el precio mínimo para filtrar los productos: ");
+        decimal precioMinimo = LeerPrecioPositivo("\nIngrese el precio mínimo para filtrar los productos: ");
 
         var productosFiltrados = inventario.FiltrarYOrdenarProductos(precioMinimo);
        
@@ -36,7 +35,17 @@ class Program
         Console.WriteLine("\n Productos filtrados y ordenados:");
         foreach (var producto in productosFiltrados)
         {
-            producto.MostrarInformacion(); // Muestra la información del producto
+            producto.MostrarInformacion(); 
+        }
+     string nombreProductoActualizar = LeerCadenaNoVacia("\nIngrese el nombre del producto para actualizar su precio: ");
+        decimal nuevoPrecio = LeerPrecioPositivo("Ingrese el nuevo precio: ");
+        if (inventario.ActualizarPrecio(nombreProductoActualizar, nuevoPrecio))
+        {
+            Console.WriteLine("Precio actualizado con éxito.");
+        }
+        else
+        {
+            Console.WriteLine("Producto no encontrado.");
         }
     }
 }
