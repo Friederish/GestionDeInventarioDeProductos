@@ -21,6 +21,16 @@ namespace GestionDeInventario
         {
             productos.Add(producto);
         }
+        public bool ActualizarPrecio(string nombre, decimal nuevoPrecio)
+        {
+            var producto = productos.FirstOrDefault(p => p.Nombre == nombre);
+            if (producto != null)
+            {
+                producto.Precio = nuevoPrecio;
+                return true;
+            }
+            return false;
+        }
 
         // Método para filtrar y ordenar los productos por precio mínimo
         public IEnumerable<Producto> FiltrarYOrdenarProductos(decimal precioMinimo)
