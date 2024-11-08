@@ -59,5 +59,16 @@ namespace GestionDeInventario
             Console.WriteLine($"Productos con precio entre 100 y 500: {grupo2}");
             Console.WriteLine($"Productos con precio > 500: {grupo3}");
         }
+        public void GenerarReporte()
+        {
+            var totalProductos = productos.Count;
+            var precioPromedio = productos.Average(p => p.Precio);
+            var productoMasCaro = productos.OrderByDescending(p => p.Precio).FirstOrDefault();
+            var productoMasBarato = productos.OrderBy(p => p.Precio).FirstOrDefault();
+            Console.WriteLine($"\nNúmero total de productos: {totalProductos}");
+            Console.WriteLine($"Precio promedio de los productos: {precioPromedio:C}");
+            Console.WriteLine($"Producto con el precio más alto: {productoMasCaro.Nombre} - {productoMasCaro.Precio:C}");
+            Console.WriteLine($"Producto con el precio más bajo: {productoMasBarato.Nombre} - {productoMasBarato.Precio:C}");
+        }
     }
 }
