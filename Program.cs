@@ -37,7 +37,7 @@ class Program
         {
             producto.MostrarInformacion(); 
         }
-     string nombreProductoActualizar = LeerCadenaNoVacia("\nIngrese el nombre del producto para actualizar su precio: ");
+        string nombreProductoActualizar = LeerCadenaNoVacia("\nIngrese el nombre del producto para actualizar su precio: ");
         decimal nuevoPrecio = LeerPrecioPositivo("Ingrese el nuevo precio: ");
         if (inventario.ActualizarPrecio(nombreProductoActualizar, nuevoPrecio))
         {
@@ -46,6 +46,66 @@ class Program
         else
         {
             Console.WriteLine("Producto no encontrado.");
+        }
+        string nombreProductoEliminar = LeerCadenaNoVacia("\nIngrese el nombre del producto para eliminar: ");
+        if (inventario.EliminarProducto(nombreProductoEliminar))
+        {
+            Console.WriteLine("Producto eliminado con éxito.");
+        }
+        else
+        {
+            Console.WriteLine("Producto no encontrado.");
+        }
+
+
+        inventario.ContarYAgruparProductos();
+
+
+        inventario.GenerarReporte();
+    }
+
+
+    static int LeerNumeroPositivo()
+    {
+        int numero;
+        while (true)
+        {
+            if (int.TryParse(Console.ReadLine(), out numero) && numero > 0)
+            {
+                return numero;
+            }
+            Console.WriteLine("Entrada inválida. Por favor, ingrese un número positivo.");
+        }
+    }
+
+
+    static string LeerCadenaNoVacia(string mensaje)
+    {
+        string entrada;
+        while (true)
+        {
+            Console.Write(mensaje);
+            entrada = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(entrada))
+            {
+                return entrada;
+            }
+            Console.WriteLine("Entrada inválida. El texto no puede estar vacío.");
+        }
+    }
+
+
+    static decimal LeerPrecioPositivo(string mensaje)
+    {
+        decimal precio;
+        while (true)
+        {
+            Console.Write(mensaje);
+            if (decimal.TryParse(Console.ReadLine(), out precio) && precio > 0)
+            {
+                return precio;
+            }
+            Console.WriteLine("Entrada inválida. Por favor, ingrese un precio positivo.");
         }
     }
 }
