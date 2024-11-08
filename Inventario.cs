@@ -50,5 +50,14 @@ namespace GestionDeInventario
                .Where(p => p.Precio > precioMinimo) 
                .OrderBy(p => p.Precio); 
         }
+        public void ContarYAgruparProductos()
+        {
+            var grupo1 = productos.Count(p => p.Precio < 100);
+            var grupo2 = productos.Count(p => p.Precio >= 100 && p.Precio <= 500);
+            var grupo3 = productos.Count(p => p.Precio > 500);
+            Console.WriteLine($"Productos con precio < 100: {grupo1}");
+            Console.WriteLine($"Productos con precio entre 100 y 500: {grupo2}");
+            Console.WriteLine($"Productos con precio > 500: {grupo3}");
+        }
     }
 }
